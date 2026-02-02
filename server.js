@@ -183,7 +183,8 @@ app.post('/generate', (req, res) => {
       addonName,
       addonAcronym: addonAcronymLower,
       creator: creatorLower,
-      creatorAcronym: String(creatorAcronym).toLowerCase()
+      creatorAcronym: String(creatorAcronym).toLowerCase(),
+      'CREATOR_ACRONYM': String(creatorAcronym).toLowerCase(),
     })
 
     res.setHeader('Content-Type', 'application/zip')
