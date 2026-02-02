@@ -1,216 +1,78 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ATA Addon Template Generator</title>
-  <style>
-    :root{
-      --bg:#0b0b0f;
-      --card:#141421;
-      --text:#f5f5f7;
-      --muted:#b8b8c7;
-      --orange:#ff7a18;
-      --orange2:#ff9a3c;
-      --border: rgba(255,255,255,.08);
-      --shadow: 0 10px 30px rgba(0,0,0,.45);
-      --radius: 16px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(255,122,24,.18), transparent 60%),
-                  radial-gradient(900px 600px at 100% 0%, rgba(255,154,60,.12), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      min-height:100vh;
-      padding:32px 18px 48px;
-    }
-    .wrap{max-width:1100px;margin:0 auto}
-    header{
-      display:flex;gap:16px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-    .brand h1{margin:0;font-size:28px;letter-spacing:.2px;line-height:1.1}
-    .brand p{margin:6px 0 0;color:var(--muted);max-width:70ch}
-    .badge{
-      padding:8px 12px;border:1px solid var(--border);border-radius:999px;
-      color:var(--muted);background:rgba(255,255,255,.03)
-    }
-    .grid{display:grid;grid-template-columns: 1.1fr .9fr;gap:18px}
-    @media (max-width: 960px){ .grid{grid-template-columns:1fr} }
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .card h2{margin:0 0 10px;font-size:18px}
-    label{display:block;color:var(--muted);font-size:13px;margin:14px 0 6px}
-    input, select{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.25);
-      color: var(--text);
-      outline:none;
-    }
-    input:focus, select:focus{
-      border-color: rgba(255,122,24,.55);
-      box-shadow: 0 0 0 4px rgba(255,122,24,.14);
-    }
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width: 520px){ .row{grid-template-columns:1fr} }
-    .btn{
-      margin-top:16px;
-      width:100%;
-      padding:12px 14px;
-      border-radius: 12px;
-      border:0;
-      cursor:pointer;
-      font-weight:700;
-      color:#0b0b0f;
-      background: linear-gradient(135deg, var(--orange), var(--orange2));
-      transition: transform .08s ease, filter .12s ease;
-    }
-    .btn:hover{transform: translateY(-1px); filter: brightness(1.03)}
-    .btn:active{transform: translateY(0px); filter: brightness(.98)}
-    .small{color:var(--muted);font-size:12px;margin-top:10px;line-height:1.35}
-    .list{margin:0; padding-left:18px; color:var(--text)}
-    .list li{margin:8px 0}
-    code{
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      padding:2px 6px;border-radius:8px;
-      color: #ffd1a8;
-    }
-    .ok{color:#7CFFB2}
-    .err{color:#ff6b6b}
-    .footer{margin-top:18px;color:var(--muted);font-size:12px}
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <header>
+  <div class="bg"></div>
+  <main class="wrap">
+    <header class="top">
       <div class="brand">
-        <h1>ATA Addon Template Generator</h1>
-        <p>Create standardized addon templates for ATA projects from the official base template.</p>
+        <div class="logo">ATA</div>
+        <div>
+          <h1>ATA Addon Template Generator</h1>
+          <p>Generates an addon template based on your trigger and directory standards.</p>
+        </div>
       </div>
-      <div class="badge">ATA Standard</div>
+      <div class="pill">ATA standard</div>
     </header>
 
-    <div class="grid">
-      <section class="card">
+    <section class="card grid">
+      <div class="panel">
         <h2>Generate template</h2>
 
-        <label>Template version</label>
-        <select id="templateVersion"></select>
-
         <label>Addon Name</label>
-        <input id="addonName" placeholder="Mega Fauna"/>
+        <input id="addonName" placeholder="Mega Fauna" />
 
-        <div class="row">
-          <div>
-            <label>Addon Acronym (e.g. fabricate → fb)</label>
-            <input id="addonAcronym" placeholder="mf"/>
-          </div>
-          <div>
-            <label>Creator Acronym (e.g. Raco → rc)</label>
-            <input id="creatorAcronym" placeholder="jn"/>
-          </div>
-        </div>
+        <label>Addon Acronym <span class="hint">(e.g. fabricate → fb)</span></label>
+        <input id="addonAcronym" placeholder="mf" />
 
-        <label>Creator (used only for triggers filename)</label>
-        <input id="creator" placeholder="John"/>
+        <label>Creator</label>
+        <input id="creator" placeholder="John" />
 
-        <button class="btn" id="generateBtn">Generate & Download .zip</button>
+        <label>Creator Acronym <span class="hint">(e.g. Raco → rc)</span></label>
+        <input id="creatorAcronym" placeholder="jn" />
 
-        <div class="small" id="status" style="margin-top:10px"></div>
-      </section>
+        <button id="generateBtn">Generate .zip</button>
 
-      <aside class="card">
-        <h2>Creator requirements</h2>
-        <ul class="list">
+        <div id="msg" class="msg" aria-live="polite"></div>
+      </div>
+
+      <div class="panel checklist">
+        <h2>Requirements</h2>
+
+        <ul>
           <li>Geometries: <code>geometry.rc_ADDONACRONYM.model_name</code></li>
           <li>Animations: <code>animation.rc_ADDONACRONYM.animation_name</code></li>
           <li>Animation Controllers: <code>controller.animation.rc_ADDONACRONYM.controller_animation_name</code></li>
           <li>Render Controllers: <code>controller.render.rc_ADDONACRONYM.render_name</code></li>
           <li>Sounds: always prefix ids with <code>rc_ADDONACRONYM</code></li>
-          <li>Texture mapping: <code>rc_ADDONACRONYM:texture_name</code></li>
-          <li>Directory rule: content must live inside <code>rc_ADDONACRONYM/</code> (and <code>rc_ADDONACRONYM/common/</code> where applicable).</li>
-          <li>Triggers: only in <code>main.js</code>. Never create additional runIntervals elsewhere. Redirect to the triggers file.</li>
-          <li>Delays: handle inside your own trigger using <code>currentTick % delay == 0</code></li>
+          <li>Textures in <code>item_texture</code>/<code>terrain_texture</code>: <code>rc_ADDONACRONYM:texture_name</code></li>
+          <li>Folders with <code>rc_ADDONACRONYM/</code> (and <code>rc_ADDONACRONYM/common/</code>) are mandatory: all content must live inside them</li>
+          <li>Triggers: use <strong>only</strong> <code>main.js</code>. Do not create triggers in other files</li>
+          <li>You may add triggers + custom components in <code>main.js</code>, but you must redirect to <code>CREATOR_triggers</code></li>
+          <li><code>runInterval</code> delay: implement inside your own trigger using <code>currentTick % (delayInTicks) == 0</code></li>
         </ul>
-        <div class="footer">To add a new template version, create a folder under <code>templates/</code> (e.g. <code>v2</code>).</div>
-      </aside>
-    </div>
-  </div>
 
-<script>
-  const statusEl = document.getElementById('status')
+        <div class="example">
+          <div class="tag">Example</div>
+          <div class="mono">
+            Addon Name: <strong>Mega Fauna</strong><br/>
+            Addon Acronym: <strong>mf</strong><br/>
+            Creator: <strong>John</strong><br/>
+            Creator Acronym: <strong>jn</strong><br/>
+            Namespace: <strong>rc_mf</strong>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  function setStatus(msg, ok=true){
-    statusEl.innerHTML = `<span class="${ok ? 'ok' : 'err'}">${msg}</span>`
-  }
+    <footer class="foot"></footer>
+  </main>
 
-  async function loadVersions(){
-    const res = await fetch('/api/templates')
-    const data = await res.json()
-    const sel = document.getElementById('templateVersion')
-    sel.innerHTML = ''
-    data.versions.forEach(v=>{
-      const opt = document.createElement('option')
-      opt.value = v
-      opt.textContent = v
-      sel.appendChild(opt)
-    })
-  }
-
-  document.getElementById('generateBtn').addEventListener('click', async () => {
-    const payload = {
-      templateVersion: document.getElementById('templateVersion').value,
-      addonName: document.getElementById('addonName').value.trim(),
-      addonAcronym: document.getElementById('addonAcronym').value.trim(),
-      creator: document.getElementById('creator').value.trim(),
-      creatorAcronym: document.getElementById('creatorAcronym').value.trim(),
-    }
-
-    if(!payload.addonName || !payload.addonAcronym || !payload.creator || !payload.creatorAcronym){
-      setStatus('Please fill all fields before generating.', false)
-      return
-    }
-
-    setStatus('Generating zip...', true)
-
-    const res = await fetch('/generate', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json' },
-      body: JSON.stringify(payload)
-    })
-
-    if(!res.ok){
-      const text = await res.text()
-      setStatus('Error: ' + text, false)
-      return
-    }
-
-    const blob = await res.blob()
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `rc_${payload.addonAcronym.toLowerCase()}_template.zip`
-    document.body.appendChild(a)
-    a.click()
-    a.remove()
-    URL.revokeObjectURL(url)
-
-    setStatus('Done. Download started.', true)
-  })
-
-  loadVersions()
-</script>
+  <script src="app.js"></script>
 </body>
 </html>
