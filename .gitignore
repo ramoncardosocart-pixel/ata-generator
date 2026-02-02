@@ -1,0 +1,5 @@
+node_modules/
+output/
+template_zip/
+.DS_Store
+logs/

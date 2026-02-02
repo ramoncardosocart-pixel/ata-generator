@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ATA Addon Template Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="logo">ATA</div>
+        <div>
+          <h1>ATA Addon Template Generator</h1>
+          <p>Gera um addon template baseado no seu padrão de triggers e diretórios.</p>
+        </div>
+      </div>
+      <div class="pill">tema: preto + laranja</div>
+    </header>
+
+    <section class="card grid">
+      <div class="panel">
+        <h2>Gerar template</h2>
+
+        <label>Addon Name</label>
+        <input id="addonName" placeholder="Mega Fauna" />
+
+        <label>Addon Acronym <span class="hint">(ex.: fabricate → fb)</span></label>
+        <input id="addonAcronym" placeholder="mf" />
+
+        <label>Creator</label>
+        <input id="creator" placeholder="John" />
+
+        <label>Creator Acronym <span class="hint">(ex.: Raco → rc)</span></label>
+        <input id="creatorAcronym" placeholder="jn" />
+
+        <button id="generateBtn">Gerar .zip</button>
+
+        <div id="msg" class="msg" aria-live="polite"></div>
+
+        <div class="note">
+          <strong>Obs:</strong> o gerador cria UUIDs novos para os dois manifests e ajusta as dependências BP↔RP automaticamente.
+        </div>
+      </div>
+
+      <div class="panel checklist">
+        <h2>Obrigatoriedades</h2>
+
+        <ul>
+          <li>Geometrias: <code>geometry.rc_ADDONACRONYM.model_name</code></li>
+          <li>Animations: <code>animation.rc_ADDONACRONYM.animation_name</code></li>
+          <li>Animation Controllers: <code>controller.animation.rc_ADDONACRONYM.controller_animation_name</code></li>
+          <li>Render Controllers: <code>controller.render.rc_ADDONACRONYM.render_name</code></li>
+          <li>Sons: sempre prefixo <code>rc_ADDONACRONYM</code> no id</li>
+          <li>Textures no <code>item_texture</code>/<code>terrain_texture</code>: <code>rc_ADDONACRONYM:texture_name</code></li>
+          <li>Pastas com <code>rc_ADDONACRONYM/</code> (e <code>rc_ADDONACRONYM/common/</code>) são obrigatórias: todo conteúdo vai dentro delas</li>
+          <li>Triggers: usar <strong>somente</strong> o <code>main.js</code>. Não criar outros triggers em outros arquivos</li>
+          <li>Pode adicionar triggers + custom components no <code>main.js</code>, mas deve redirecionar para o <code>CREATOR_triggers</code></li>
+          <li>Delay no <code>runInterval</code>: faça no seu próprio trigger usando <code>currentTick % (delayInTicks) == 0</code></li>
+        </ul>
+
+        <div class="example">
+          <div class="tag">Exemplo</div>
+          <div class="mono">
+            Addon Name: <strong>Mega Fauna</strong><br/>
+            Addon Acronym: <strong>mf</strong><br/>
+            Creator: <strong>John</strong><br/>
+            Creator Acronym: <strong>jn</strong><br/>
+            Namespace: <strong>rc_mf</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>Rodando localmente via Node.js (Express).</span>
+      <span class="dot">•</span>
+      <span>Comando: <code>npm i</code> e depois <code>npm start</code></span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

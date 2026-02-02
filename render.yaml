@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ata-addon-template-generator
+    env: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      # Optional (team-only access):
+      # - key: ATA_USER
+      #   value: purplebyte
+      # - key: ATA_PASS
+      #   sync: false
