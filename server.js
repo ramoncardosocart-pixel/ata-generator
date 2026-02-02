@@ -151,7 +151,8 @@ app.post('/generate', (req, res) => {
       'Addon Name': addonName,
       'ADDONACRONYM': addonAcronymLower,
       'rc_ADDONACRONYM': `rc_${addonAcronymLower}`,
-      'CREATOR_triggers': `${creatorLower}_triggers`
+      'CREATOR_triggers': `${creatorLower}_triggers`,
+      'CREATOR_ACRONYM': String(creatorAcronym).toLowerCase(),
     }
 
     processTree(TEMPLATE_DIR, outputRoot, replacements)
@@ -184,7 +185,6 @@ app.post('/generate', (req, res) => {
       addonAcronym: addonAcronymLower,
       creator: creatorLower,
       creatorAcronym: String(creatorAcronym).toLowerCase(),
-      'CREATOR_ACRONYM': String(creatorAcronym).toLowerCase(),
     })
 
     res.setHeader('Content-Type', 'application/zip')
