@@ -125,6 +125,8 @@ app.post('/generate', (req, res) => {
 
             // Triggers file name (import path in main.js uses this token)
             'CREATOR_triggers': `${creatorLower}_triggers`,
+            
+            'CREATOR_ACRONYM': String(creatorAcronym).toLowerCase(),
         }
 
         processTree(TEMPLATE_DIR, outputRoot, replacements)
